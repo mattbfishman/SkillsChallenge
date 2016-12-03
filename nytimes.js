@@ -19,8 +19,13 @@ var NYTSearch = function(searchQuery){
 	    for(i=0;i<result.results.length;i++){
 	    	picks += result.results[i].critics_pick;
 	    	let review = result.results[i];
+	    	let thumb = "";
+	    	if(review.critics_pick)
+	    		thumb = "&#128077; "
+	    	else
+	    		thumb = "&#128078; "
 	    	reviews.innerHTML += "<p>" + 
-	    		"<b>Headline: </b> " + review.headline + "<br>"+
+	    		"<b>Headline: </b> " + thumb + review.headline + "<br>"+
 	    		"<b>Author: </b> " + review.byline + "<br>" +
 	    		"<b>Published: </b> " + review.publication_date + "<br>"+
 	    		"<b>Summary: </b> " + review.summary_short + "<br>"+
