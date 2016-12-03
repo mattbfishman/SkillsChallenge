@@ -3,25 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
+  <form>
+	  <div class="form-group">
+	    <label for="movieLabel">Search Movie</label>
+	    <input type="text" class="form-control" id="movieSearch" placeholder="Search Movie">
+	  </div>
 
+	  <button type="submit" id="search" class="btn btn-primary">Submit</button>
+  </form>
   	<p id="imdb">
   	</p>
   </body>
   <script>
+// http://www.omdbapi.com/?t=Godfather&y=&plot=short&r=json
+  
+    $( "#search" ).click(function() {
+    var movieName = $("#movieSearch").val();
+    var imdbSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&r=json';
+	
+	$.getJSON( imdbSearch, function(data) {
 
-  $.getJSON('http://www.omdbapi.com/?' function(data) {
+	  	var obj = data;
 
-  	var obj = data;
-
-	document.getElementById("imdb").innerHTML =
-	obj.Title + "<br>" +
-	obj.Actors + "<br>" +
-	obj.Genre + "<br>" +
-	obj.imdbVotes + "<br>" +
-	obj.imdbRating;
-	});
+		document.getElementById("imdb").innerHTML =
+		obj.Title + "<br>" +
+		obj.Actors + "<br>" +
+		obj.Genre + "<br>" +
+		obj.imdbVotes + "<br>" +
+		obj.imdbRating;
+		});
+	  return false;
+    });
   </script>
 </html>
