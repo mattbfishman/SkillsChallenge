@@ -24,21 +24,27 @@
   
     $( "#search" ).click(function() {
     var movieName = $("#movieSearch").val();
-    var imdbSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&r=json';
+    var imdbSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
 	
+
 	$.getJSON( imdbSearch, function(data) {
-
-	  	var obj = data;
-
+		console.log(data);
 		document.getElementById("imdb").innerHTML = 
-		"<b>Title:</b> " + obj.Title + "<br>" +
-		"<b>Actors:</b> " +obj.Actors + "<br>" +
-		"<b>Director:</b> " +obj.Director + "<br>" +
-		"<b>Plot Summary:</b> " +obj.Plot + "<br>" +
-		"<b>Awards:</b> " +obj.Awards + "<br>" +
-		"<b>Genre:</b> " +obj.Genre + "<br>" +
-		"<b>Number of Votes:</b> " +obj.imdbVotes + "<br>" +
-		"<b>Rating:</b> " +obj.imdbRating;
+		"<b>Title:</b> " + data.Title + "<br>" +
+		"<b>Actors:</b> " +data.Actors + "<br>" +
+		"<b>Director:</b> " +data.Director + "<br>" +
+		"<b>Plot Summary:</b> " +data.Plot + "<br>" +
+		"<b>Awards:</b> " +data.Awards + "<br>" +
+		"<b>Genre:</b> " +data.Genre + "<br>" +
+		"<b>Number of IMDB Votes:</b> " +data.imdbVotes + "<br>" +
+		"<b>IMDB Rating:</b> " +data.imdbRating + "<br>" +
+		"<b>Number of Tomato Critic Reviews:</b> " +data.tomatoReviews + "<br>" +
+		"<b>Tomatoe Critic Rating:</b> " +data.tomatoRating + "<br>" +
+		"<b>Tomator Critic Meter:</b> " +data.tomatoMeter + "<br>" +
+		"<b>Number of Tomato User Reviews:</b> " +data.tomatoUserReviews + "<br>" +
+		"<b>Tomator User Rating:</b> " +data.tomatoUserRating + "<br>" +
+		"<b>Tomator User Meter:</b> " +data.tomatoUserMeter;
+
 		});
 	  return false;
     });
