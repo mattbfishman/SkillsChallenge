@@ -21,16 +21,41 @@
   	</p>
   	<p id="nyTimes">
   	</p>
+
+
+
+  	<p id ="theMovieDB">
+  	</p>
+
   	<p id="nytimes-reviews">
   	</p>
+  
+
   </body>
   <script>
   
     $( "#search" ).click(function() {
 	    var movieName = $("#movieSearch").val();
-	    var imdbTomatoSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
 		NYTSearch(movieName);
+		movieDBSearch(movieName);
+		imdbRottenSearch(movieName);
+	  	return false;
 
+    });
+
+	function movieDBSearch(movieName){
+		$.getJSON('http://api.themoviedb.org/3/search/movie?api_key=def5f8b6f1de9e4a8a1b2f19b93c9680&query=' + movieName, function(data){
+			document.getElementById("theMovieDB").innerHTML = 
+			"<b>The MovieDB Popularity: </b> " + data.results[0].popularity + "<br>" +
+			"<b>The MovieDB Vote Average: </b> " + data.results[0].vote_average + "<br>" +
+			"<b>The MovieDB Vote Count: </b> " + data.results[0].vote_count;
+
+		});
+
+	}
+
+	function imdbRottenSearch(movieName){
+		var imdbTomatoSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
 		$.getJSON( imdbTomatoSearch, function(data) {
 			document.getElementById("imdbRotten").innerHTML = 
 			"<b>Title:</b> " + data.Title + "<br>" +
@@ -49,8 +74,7 @@
 			"<b>Tomato User Meter:</b> " +data.tomatoUserMeter;
 	
 		});
-	  return false;
 
-    });
+	}
   </script>
 </html>
