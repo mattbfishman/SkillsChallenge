@@ -30,12 +30,14 @@
 
 	  	var obj = data;
 
-		document.getElementById("imdb").innerHTML =
-		obj.Title + "<br>" +
-		obj.Actors + "<br>" +
-		obj.Genre + "<br>" +
-		obj.imdbVotes + "<br>" +
-		obj.imdbRating;
+		document.getElementById("imdb").innerHTML = 
+		"<b>Title:</b> " + obj.Title + "<br>" +
+		"<b>Actors:</b> " +obj.Actors + "<br>" +
+		"<b>Director:</b> " +obj.Director + "<br>" +
+		"<b>Awards:</b> " +obj.Awards + "<br>" +
+		"<b>Genre:</b> " +obj.Genre + "<br>" +
+		"<b>Number of Votes:</b> " +obj.imdbVotes + "<br>" +
+		"<b>Rating:</b> " +obj.imdbRating;
 		});
 	  return false;
     });
