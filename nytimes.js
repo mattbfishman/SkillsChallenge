@@ -1,11 +1,11 @@
 var NewYorkTimesReviews = []
 
-var NYTSearch = function(searchQuery){
+var NYTSearch = function(movieData){
 
 	var nytUrl = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
 	nytUrl += '?' + $.param({
 	  'api-key': "64483963a3d84321b85ce91504cd34f2",
-	  'query' : searchQuery
+	  'query' : movieData.movieName;
 	});
 	$.ajax({
 	  url: nytUrl,
@@ -36,6 +36,10 @@ var NYTSearch = function(searchQuery){
 	    }
 	  	document.getElementById('nyTimes').innerHTML =
 	  		"<b>New York Times Critic's Picks:</b> " + picks + "/" + result.results.length;
+
+	  	movieData.nytimesCriticApprovals = picks;
+	  	movieData.nytimesNumberOfCritics = result.results.length;
+
 	}).fail(function(err) {
 	  throw err;
 	});
