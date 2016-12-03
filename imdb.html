@@ -28,21 +28,50 @@
   <script>
   
     $( "#search" ).click(function() {
+
+    	var movieData = 
+    		{ movieName: $("#movieSearch").val(),
+			  title: "",
+			  actors: "",
+			  director: "",
+			  plotSummary: "",
+			  awards: "",
+			  genre: "",
+			  IMDBNumberOfVotes: 0,
+			  IMDBRating: 0,
+			  tomatoNumberOfCriticReviews: 0,
+			  tomatoCriticRating: 0,
+			  tomatoCriticMeter: 0,
+			  tomatoNumberOfUserReviews: 0,
+			  tomatoUserRating: 0,
+			  tomatoUserMeter: 0,
+			  nytimesCriticApprovals: 0,
+			  nytimeNumberOfCritics: 0,
+			  moviedbPopulatrityRating: 0,
+			  moviedbVoteAverage: 0,
+			  moviedbVoteCount: 0
+			}
+
 	    var movieName = $("#movieSearch").val();
 		NYTSearch(movieName);
-		movieDBSearch(movieName);
-		imdbRottenSearch(movieName);
+		movieDBSearch(movieData);
+		imdbRottenSearch(movieData);
 	  	return false;
+
 
     });
 
-	function movieDBSearch(movieName){
-		$.getJSON('http://api.themoviedb.org/3/search/movie?api_key=def5f8b6f1de9e4a8a1b2f19b93c9680&query=' + movieName, function(data){
-			document.getElementById("theMovieDB").innerHTML = 
+	function movieDBSearch(movieData){
+		$.getJSON('http://api.themoviedb.org/3/search/movie?api_key=def5f8b6f1de9e4a8a1b2f19b93c9680&query=' + movieData.movieName, function(data){
+			/*document.getElementById("theMovieDB").innerHTML = 
 			"<b>The MovieDB Popularity: </b> " + data.results[0].popularity + "<br>" +
 			"<b>The MovieDB Vote Average: </b> " + data.results[0].vote_average + "<br>" +
 			"<b>The MovieDB Vote Count: </b> " + data.results[0].vote_count;
-
+			*/
+			movieData.moviedbPopulatrityRating = data.results[0].popularity;
+			movieData.moviedbVoteAverage = data.results[0].vote_average;
+			movieData.moviedbVoteCount = data.results[0].vote_count;
+			console.log(movieData.moviedbVoteCount);
 		});
 
 	}
@@ -50,7 +79,7 @@
 	function imdbRottenSearch(movieName){
 		var imdbTomatoSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
 		$.getJSON( imdbTomatoSearch, function(data) {
-			document.getElementById("imdbRotten").innerHTML = 
+			/*document.getElementById("imdbRotten").innerHTML = 
 			"<b>Title:</b> " + data.Title + "<br>" +
 			"<b>Actors:</b> " +data.Actors + "<br>" +
 			"<b>Director:</b> " +data.Director + "<br>" +
@@ -65,6 +94,23 @@
 			"<b>Number of Tomato User Reviews:</b> " +data.tomatoUserReviews + "<br>"+
 			"<b>Tomato User Rating:</b> " +data.tomatoUserRating + "<br>" +
 			"<b>Tomato User Meter:</b> " +data.tomatoUserMeter;
+			*/
+
+			movieData.title = data.Title;
+			movieData.actors = data.Actors;
+			movieData.director = data.Director;
+			movieData.plotSummary = data.Plot;
+			movieData.awards = data.Awards;
+			movieData.genre = data.Genre;
+			movieData.IMDBNumberOfVotes = data.imdbVotes;
+			movieData.IMDBRating = data.imdbRating;
+			movieData.tomatoNumberOfCriticReviews = data.tomatoReviews;
+			movieData.tomatoCriticRating = data.tomatoRating;
+			movieData.tomatoCriticMeter = data.tomatoCriticMeter;
+			movieData.tomatoNumberOfUserReviews = data.tomatoUserReviews;
+			movieData.tomatoUserRating = data.tomatoUserRating;
+			movieData.tomatoUserMeter = data.tomatoUserMeter;
+
 	
 		});
 
