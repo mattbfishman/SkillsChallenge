@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+  	<p id="imdb">
+  	</p>
+  </body>
+  <script>
+
+  $.getJSON('http://www.omdbapi.com/?' function(data) {
+
+  	var obj = data;
+
+	document.getElementById("imdb").innerHTML =
+	obj.Title + "<br>" +
+	obj.Actors + "<br>" +
+	obj.Genre + "<br>" +
+	obj.imdbVotes + "<br>" +
+	obj.imdbRating;
+	});
+  </script>
+</html>
