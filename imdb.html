@@ -21,6 +21,9 @@
   	</p>
   	<p id="nyTimes">
   	</p>
+  	<p id ="theMovieDB">
+
+  	</p>
   </body>
   <script>
   
@@ -28,6 +31,7 @@
 	    var movieName = $("#movieSearch").val();
 	    var imdbTomatoSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
 		NYTSearch(movieName);
+		movieDBSearch(movieName);
 
 		$.getJSON( imdbTomatoSearch, function(data) {
 			document.getElementById("imdbRotten").innerHTML = 
@@ -50,5 +54,17 @@
 	  return false;
 
     });
+
+	function movieDBSearch(movieName){
+		$.getJSON('http://api.themoviedb.org/3/search/movie?api_key=def5f8b6f1de9e4a8a1b2f19b93c9680&query=' + movieName, function(data){
+			console.log(data);
+			document.getElementById("theMovieDB").innerHTML = 
+			"<b>The MovieDB Popularity: </b> " + data.results[0].popularity + "<br>" +
+			"<b>The MovieDB Vote Average: </b> " + data.results[0].vote_average + "<br>" +
+			"<b>The MovieDB Vote Count: </b> " + data.results[0].vote_count;
+
+		});
+
+	}
   </script>
 </html>
