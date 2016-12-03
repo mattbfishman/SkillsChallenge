@@ -2,7 +2,6 @@ var NewYorkTimesReviews = []
 
 var NYTSearch = function(searchQuery){
 
-	movieSearch = "Star Wars"
 	var nytUrl = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
 	nytUrl += '?' + $.param({
 	  'api-key': "64483963a3d84321b85ce91504cd34f2",

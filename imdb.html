@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <scipt src = "nytimes.js"
+    <script src ="nytimes.js"></script>
   </head>
   <body>
   <form>
@@ -17,37 +17,38 @@
 
 	  <button type="submit" id="search" class="btn btn-primary">Submit</button>
   </form>
-  	<p id="imdb">
+  	<p id="imdbRotten">
+  	</p>
+  	<p id="nyTimes">
   	</p>
   </body>
   <script>
-// http://www.omdbapi.com/?t=Godfather&y=&plot=short&r=json
   
     $( "#search" ).click(function() {
-    var movieName = $("#movieSearch").val();
-    var imdbSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
+	    var movieName = $("#movieSearch").val();
+	    var imdbTomatoSearch = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
+		NYTSearch(movieName);
+
+		$.getJSON( imdbTomatoSearch, function(data) {
+			document.getElementById("imdbRotten").innerHTML = 
+			"<b>Title:</b> " + data.Title + "<br>" +
+			"<b>Actors:</b> " +data.Actors + "<br>" +
+			"<b>Director:</b> " +data.Director + "<br>" +
+			"<b>Plot Summary:</b> " +data.Plot + "<br>" +
+			"<b>Awards:</b> " +data.Awards + "<br>" +
+			"<b>Genre:</b> " +data.Genre + "<br>" +
+			"<b>Number of IMDB Votes:</b> " +data.imdbVotes + "<br>" +
+			"<b>IMDB Rating:</b> " +data.imdbRating + "<br>" +
+			"<b>Number of Tomato Critic Reviews:</b> " +data.tomatoReviews + "<br>" +
+			"<b>Tomato Critic Rating:</b> " +data.tomatoRating + "<br>" +
+			"<b>Tomato Critic Meter:</b> " +data.tomatoMeter + "<br>" +
+			"<b>Number of Tomato User Reviews:</b> " +data.tomatoUserReviews + "<br>"+
+			"<b>Tomato User Rating:</b> " +data.tomatoUserRating + "<br>" +
+			"<b>Tomato User Meter:</b> " +data.tomatoUserMeter;
 	
-
-	$.getJSON( imdbSearch, function(data) {
-		console.log(data);
-		document.getElementById("imdb").innerHTML = 
-		"<b>Title:</b> " + data.Title + "<br>" +
-		"<b>Actors:</b> " +data.Actors + "<br>" +
-		"<b>Director:</b> " +data.Director + "<br>" +
-		"<b>Plot Summary:</b> " +data.Plot + "<br>" +
-		"<b>Awards:</b> " +data.Awards + "<br>" +
-		"<b>Genre:</b> " +data.Genre + "<br>" +
-		"<b>Number of IMDB Votes:</b> " +data.imdbVotes + "<br>" +
-		"<b>IMDB Rating:</b> " +data.imdbRating + "<br>" +
-		"<b>Number of Tomato Critic Reviews:</b> " +data.tomatoReviews + "<br>" +
-		"<b>Tomatoe Critic Rating:</b> " +data.tomatoRating + "<br>" +
-		"<b>Tomator Critic Meter:</b> " +data.tomatoMeter + "<br>" +
-		"<b>Number of Tomato User Reviews:</b> " +data.tomatoUserReviews + "<br>" +
-		"<b>Tomator User Rating:</b> " +data.tomatoUserRating + "<br>" +
-		"<b>Tomator User Meter:</b> " +data.tomatoUserMeter;
-
 		});
 	  return false;
+
     });
   </script>
 </html>
